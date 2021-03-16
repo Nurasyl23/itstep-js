@@ -24,7 +24,6 @@ const filter = predicate => array => {
 const filterOnlyNegative = filter(n => n < 0);
 const filterOnlyPositive = filter(n => n > 0);
 
-
 const getSum = numbers => {
   let sum = 0;
 
