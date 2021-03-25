@@ -1,17 +1,20 @@
-// 1. Поместить все функции связанные с выводом в консоль в отедельный объект (log)
-// const log = {
-//   balance: balance => console.log(),
-// }
 
-// log.blanace(balance);
+// 3. В продолжение яблок
+// 3.1 Первратить ящик Box в полноценный объект с конструктором и прототипом
 
-// 2. Поместить все функции связанные с аналитикой в отдельный объект (analitics)
+// 3.2 Добавить метод getQuantityString на основании nWord 
+
+// Первый вариант
+// const appleBox = new Box(["яблоко", "яблока", "яблок"]);
+
+// Второй вариант
+// const appleBox = new Box(nWord((["яблоко", "яблока", "яблок"]));
+
+// appleBox.getQuantityString(10) // 10 яблок
 
 
-
-// 3*. Используя Object.entries написать функцию которая будет принимать массив чисел и объект с операциями
-//  и примять эти операции к массиву с помощью .map 
-//  и выводить в консоль Название операции и получившийся массив 
+// ....
+// const pearBox = new Box(["груша", "груши", "груш"]);
 
 const randomInt = (min, max) => 
   min + Math.floor(Math.random() * (max - min));
@@ -68,11 +71,11 @@ const nApples = nNoun("яблоко", "яблока", "яблок");
 
 const log = {
   boxState: box => {
-    console.log("В ящике " + nApples(box));
+    console.log("В ящике " + nApples(box.amount));
   
-    if (box > 0) {
+    if (box.amount > 0) {
       console.log("Полная коробка");
-    } else if (box === 0) {
+    } else if (box.amount === 0) {
       console.log("Пустая коробка");
     } else { // box < 0
       console.log("Кредитная коробка");
@@ -92,10 +95,10 @@ const log = {
   result: (box, goal) => {
     
     console.log("----------");
-    if (box >= goal) {
-      console.log("Ура мы накопили " + nApples(box) + "!");
+    if (box.amount >= goal) {
+      console.log("Ура мы накопили " + nApples(box.amount) + "!");
     } else {
-      console.log("Не повезло, не фартануло. Мы накопили только " + nApples(box) + " =(");
+      console.log("Не повезло, не фартануло. Мы накопили только " + nApples(box.amount) + " =(");
     }
   },
 
@@ -119,19 +122,36 @@ const log = {
   },
 }
 
+class Box {
+  amount;
+
+  constructor(amount = 0) {
+    this.amount = amount;
+  }
+  
+  changeAmount(transaction) {
+    this.amount += transaction;
+  }
+  
+} 
+
+
+
 // ---- 
 let amounts = createRandomArray(-10, 20) (30);
 
 let goal = 100;
 
-let box = 0;
+let box = new Box();
+
+console.log(box);
 log.boxState(box);
 
 let transactions = [];
 
-while (box < goal && amounts.length > 0) {
+while (box.amount < goal && amounts.length > 0) {
   let amount = amounts.shift();
-  box += amount;
+  box.changeAmount(amount);
 
   transactions.push(amount);
 
