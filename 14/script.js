@@ -1,34 +1,34 @@
-// Переменные как константы . промежуточные переменные 
-// Функции - в математическом смысле. чистые функция
-// Объекты - неизменяемые, данные (POJO), Модули - набор функционала (префикс), 
+/*
+В функциональной версии
 
-// React - функционального: компонент - функция
-
-// username - обязательное, не меньше 5 символов
-// passwrods - обязательное, не меньше 8 символов, (содержит символ !) (содержит большую букву и цифру)
-// age - число, целое, (0, 150)
+Добавить недостоющие "кусочки" - проверка что число, проверка что число в промежутке
+Собрать проверки всех полей
+Добавить проверку поля рост
+необязателньое
+целое число
+от 0 до 300
+*/
 
 let validForm = {
   username: "anton",
-  password: "anton!anton",
+  password: "antonaca!",
   age: "20",
   height: "100",
 };
 
 let invalidForm = {
-  username: "antoadvd",
-  password: "antodvaav",
-  age: "ab",
+  username: "anto",
+  password: "antoodivp",
+  age: "20a",
   height: "500"
 };
 
 
-// string -> ValidationState
 const createValidationState = (value) => ({
   value, // string - Исходное значение поля
   result: value, // any - Чистое значение поля
   isValid: true, //bolean - Флаг валидности поля
-  error: null // string - Ошибка (если есть )
+  error: null // string - Ошибка (если есть)
 });
 
 const withError = (state, error) => ({
@@ -37,10 +37,6 @@ const withError = (state, error) => ({
   isValid: false,
   error
 })
-
-// ValidationState -> required -> length(8) -> hasChar(ExclamationMark) -> ValidationState
-// ValidationState -> required -> isNumber() -> isInRange(0, 150) -> ValidationState
-
 const required = (state) => {
   if (!state.isValid) {
     return state;
@@ -48,7 +44,6 @@ const required = (state) => {
 
   return state.result.length > 0 ? state : withError(state, "Обязательное поле");
 }
-
 const length = (minLength) => (state) => {
   if (!state.isValid) {
     return state;
@@ -56,41 +51,47 @@ const length = (minLength) => (state) => {
 
   return state.result.length >= minLength ? state : withError(state, "Длина должна быть не меньше " + minLength);
 }
-/*
-const validateAge = (age) => {
-  let ageNumber = parseInt(age);
-
-  if (isNaN(ageNumber) || age !== String(ageNumber)) {
-    return [false, "Возраст должен быть числом"];
-  }
-
-  if (age < 0 || age > 150) {
-    return [false, "Возраст должен быть в промежутке от 0 до 150 лет"];
-  }
-
-  return [true, null];
-}*/
-const isNumber = (age) => (state) => {
-  if(!state.isValid) {
+const hasChar = (state) => {
+  if (!state.isValid) {
     return state;
-  } //else if (isNaN(parseInt(age)) || age !== String(parseInt(age))) {
-    //return withError(state, "Возраст должен быть числом");
-  //}
-  return state.result.value == isNaN(parseInt(age))  ? state : withError(state, "Возраст должен быть числом");
+  } 
+  if (state.result.indexOf("!") < 0) {
+    return withError(state, "Пароль должен содержать '!'");
+  } else {
+    return state;
+  }
 }
-/*function isNumber(num) {
-	return typeof num === 'number' && !isNaN(num);
-}*/
 
-const validate = (...validators) => (initialState) =>
+const isNumber = (state) => {
+  if (!state.isValid) {
+    return state;
+  } 
+  if (isNaN(parseInt(state.result)) || state.result !== String(parseInt(state.result))) {
+    return withError(state, "Возраст должен быть числом");
+  } else {
+    return state;
+  }
+}
+
+const isInRange = (min, max) => (state) => {
+  if (!state.isValid) {
+    return state;
+  } 
+  if (state.result < min || state.result > max) {
+    return withError(state, "Должно быть между " + min + " и " + max);
+  } else {
+    return state;
+  }
+}
+const validate = (...validators) => (initialState) => 
   validators.reduce((state, validator) => validator(state), initialState);
+
 
 let UserFormValidation = {
   username: validate(required, length(5)),
-  password: validate(required, length(8)),
-  age: validate(required, isNumber())
-  //age: validateAge,
-  //height: validateHeight,
+  password: validate(required, length(8), hasChar),
+  age: validate(required, isNumber, isInRange(0, 150)),
+  height: validate(required, isNumber, isInRange(0, 300)),
 };
 
 const validateFiled = key => value => {
@@ -102,15 +103,6 @@ const validateFiled = key => value => {
     : state
   );
 }
-//UserFormValidation[key] ? UserFormValidation[key](value) : UserFormValidation["_default"](value);
-
-// UserForm = { string: string }
-// Errors = { string: string }
-// Maybe<User> = User | null
-// UserForm -> [boolean, Errors, Maybe<User>]
-// form -> validateFields -> isFormValid -> 
-//                        ----------------> [isValid, errors, createUser]
-// pipe(form, validateFileds, isFormValid, createResult)
 const validateUserForm = form => {
 
   const validationStates = 
@@ -133,7 +125,7 @@ const createUser = ({
   username,
   password,
   age,
-  height,
+  height
 }) => ({
   username,
   password,
@@ -142,8 +134,6 @@ const createUser = ({
   dateOfRegistration: new Date()
 });
 
-// UserForm -> void (Побочный эффект)
-// Пограничная функция между миром чистых функций и миром побочных эффектов
 const handleSubmit = (form) => {
   // проверка типов данных 
   const [isValid, errors, user] = validateUserForm(form);
@@ -156,8 +146,6 @@ const handleSubmit = (form) => {
     console.log("Форма заполнена с ошибками", errors, form);
   }
 }
-
-/// 
 
 handleSubmit(validForm);
 console.log("-----");
