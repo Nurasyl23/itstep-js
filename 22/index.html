@@ -25,16 +25,26 @@
 
     <div class="home__scores scores">
       <h2>Счет</h2>
+      <span class="cnt"></span>
     </div>
     
     <div class="game-state-placeholder"></div>
 
-    <div class="home__settings settings">
-      <div class="button-start" id="button-start">Начать игру</div>
-    </div>
-
-    <label>
-        <select class="home__list home__list-1 home__list-hidden" name="home__list home__list-1">
+    <div class="home__container">
+      <label>
+          <select class="home__list home__list-1 home__list-hidden" name="home__list home__list-1">
+            <option value="choose" class="list__item">Число парных карточек</option>
+            <option value="2" class="list__item">2</option>
+            <option value="3" class="list__item">3</option>
+            <option value="4" class="list__item">4</option>
+            <option value="5" class="list__item">5</option>
+            <option value="6" class="list__item">6</option>
+            <option value="8" class="list__item">8</option>
+          </select>
+      </label>
+  
+      <label>
+        <select class="home__list home__list-2 home__list-hidden" name="home__list home__list-2">
           <option value="choose" class="list__item">Число парных карточек</option>
           <option value="2" class="list__item">2</option>
           <option value="3" class="list__item">3</option>
@@ -44,19 +54,13 @@
           <option value="8" class="list__item">8</option>
         </select>
     </label>
+    </div>
 
-    <label>
-      <select class="home__list home__list-2 home__list-hidden" name="home__list home__list-2">
-        <option value="choose" class="list__item">Число парных карточек</option>
-        <option value="2" class="list__item">2</option>
-        <option value="3" class="list__item">3</option>
-        <option value="4" class="list__item">4</option>
-        <option value="5" class="list__item">5</option>
-        <option value="6" class="list__item">6</option>
-        <option value="8" class="list__item">8</option>
-      </select>
-  </label>
-      
+    <div class="home__settings settings">
+      <div class="button-start" id="button-start">Начать игру</div>
+    </div>
+
+    
   </div>
 
   <div class="game-state game-state_hidden" id="game-state">
@@ -70,9 +74,9 @@
   <div class="menu menu__hidden" id="menu">
     <div class="menu__head"></div>
     <div class="menu__list">
-      <div class="menu__list-item">выйти</div>
-      <div class="menu__list-item">выйти</div>
-      <div class="menu__list-item">выйти</div>
+      <div class="menu__list-item" id="menu__list-item">выйти</div>
+      <div class="menu__list-item" id="menu__list-item">выйти</div>
+      <div class="menu__list-item" id="menu__list-item">выйти</div>
     </div>
   </div>
 

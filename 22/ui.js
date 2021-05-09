@@ -23,6 +23,7 @@ const createUi = () => {
   const buttonPause = document.getElementById("button-pause");
 
   const menu = document.getElementById("menu");
+  const menuButton = document.getElementById("menu__list-item")
   
   const selectFirstElement = document.querySelector('.home__list-1');
   const selectSecondElement = document.querySelector('.home__list-2');
@@ -47,7 +48,7 @@ const createUi = () => {
         buttonPause.classList.remove("button-pause_hidden");
     
         const game = createGame(gameContainer, gameTimer, (time) => {
-        home.classList.remove("home_hidden");
+          home.classList.remove("home_hidden");
           buttonPause.classList.add("button-pause_hidden");
           buttonStart.classList.remove("button-start_hidden");
 
@@ -72,6 +73,20 @@ const createUi = () => {
           selectFirstElement.classList.add("home__list-hidden");
           selectSecondElement.classList.add("home__list-hidden");
           menu.classList.remove("menu__hidden");
+
+          menuButton.addEventListener("click", () => {
+            home.classList.remove("home_hidden");
+            buttonPause.classList.add("button-pause_hidden");
+            buttonStart.classList.remove("button-start_hidden");
+            selectFirstElement.classList.remove("home__list-hidden");
+            selectSecondElement.classList.remove("home__list-hidden");
+            menu.classList.add("menu__hidden");
+
+            buttonPause.removeEventListener("click", togglePause);
+
+            //gridDiv.remove();
+            pair = [];
+          });
         }
       };
 

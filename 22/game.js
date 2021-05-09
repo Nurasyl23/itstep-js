@@ -1,27 +1,26 @@
-// Генерируем массив Длиной N * N, в котором по две копии всех чисел от 0 до N * N / 2
-// 0, 1, 2, 3, 4, 5, 6, 7
-// 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5 
-// 0, 0, 1, 1, 2, 2, 3, 3 ..
-
-// Отсортировать его случайно.
-/*
-Добваить функционал в нашу игру (хотя бы одну фичу)
-
-Добавить возмможность выбора размера сетки N M
-
-Показываем экран выбора
-Набор кнопок 3x3 3x4
-Наборк кнопок в два ряда
-3 4 5 x 2 3 5
-Select - change
-Ваш вариант
-Начинаем игру
-Отображать конец игры + возможность сразу начать следующую
-
-Добавить счетчик открытий и использовать его как финальный счет/результат
-
-Выводить в карточки не цифры а картинки
-*/
+// возможноть прервать/покинуть/прекратить игру (полностью)
+//
+// Добавить счетчик открытий и использовать его как финальный счет/результат
+//
+// Выводить в карточки не цифры а картинки
+//
+// Добавить список результатов Выводить время, количество ходов и (Дату и время игры)
+//
+// ** В настройки добавить возможность выбирать "скин" игры.
+//
+// цвет, внешний вид карточки
+// анимация открытия закрытия
+// специально отображение отгаданных карточек.
+//
+//--------------------------------------------------------------------------------------
+// *** Провести рефакторинг функции createGame
+//
+// либо переделать все внутренние функци в чистые и вынести обратно наружу
+//
+// либо переделать в класс Game в котором все состояние будет храниться и обрабатываться
+// 
+// Придумать как обновлять таймер на странице не в нутри game а внутри ui
+// --------------------------------------------------------------------------------------
 
 console.log(document);
 const generateValues = (n, m) =>
@@ -52,7 +51,7 @@ const createGame = (gameDiv, timerDiv, gameOverCallback) => {
 
   let isRunning = false;
 
-  console.log(values);
+  //console.log(values);
 
 
   const createCard = (index, value) => {
@@ -69,7 +68,41 @@ const createGame = (gameDiv, timerDiv, gameOverCallback) => {
 
     return div;
   }
+  /*
+    const btn = document.querySelector('.button');
 
+    function hendleBtnClick(event) {
+      event.preventDefault();
+      // eslint-disable-next-line prefer-const
+      let counteClickBtn = btn.textContent;
+      btn.textContent = parseInt(counteClickBtn) + 1;
+    }
+    
+    btn.addEventListener('click', hendleBtnClick);
+    */
+  /*
+  document.querySelectorAll('ul .btn')
+  .forEach(function(el){ 
+    el.onclick = function() {
+      let cnt = this.closest('li').querySelector('.cnt');
+      cnt.innerText = parseInt(cnt.innerText, 10)+1;
+    };
+  });
+<ul>
+  <li>
+    <button class="btn">Button</button>
+    <span class="cnt">0</span>
+  </li>
+  <li>
+    <button class="btn">Button</button>
+    <span class="cnt">0</span>
+  </li>
+  <li>
+    <button class="btn">Button</button>
+    <span class="cnt">0</span>
+  </li>
+</ul>
+*/
   let pair = []; // 0-2 элементов
 
   const openCard = (cardDiv) => {
@@ -86,12 +119,52 @@ const createGame = (gameDiv, timerDiv, gameOverCallback) => {
   const extractCardIndex = (cardDiv) => parseInt(cardDiv.dataset.index);
 
   const handleClick = (event) => {
+    /*
+    let i = 0;
+    let scores =  i + event.target.value;
+    console.log(scores);
+    console.log(event.target.value)
+    */
+   /*
+  document.getElementsByClassName("card__face")
+  .forEach(function(el){ 
+    el.onclick = function() {
+      let cnt = document.getElementsByClassName('cnt');
+      cnt.innerText = parseInt(cnt.innerText, 10)+1;
+      console.log(cnt)
+    };
+  });
+*//*
+  const d = () => {
+    let cnt = document.getElementsByClassName('cnt');
+    cnt.innerText = parseInt(cnt.innerText, 10)+1;
+    console.log(cnt)
+    console.log(cnt.innerText)
+  };
+  d()*/
+  /*
+  document.getElementsByClassName('card').onclick = function(e) {
+    let target = e.target;
+    if (target.tagName != 'DIV') return;
+    let cnt = target.document.getElementsByClassName('cnt');
+    cnt.innerText = parseInt(cnt.innerText, 10)+1;
+  }
+  */
+    /*
+    document.querySelector('ul').onclick = function(e) {
+      let target = e.target;
+      if (target.tagName != 'BUTTON') return;
+      let cnt = target.closest('li').querySelector('.cnt');
+      cnt.innerText = parseInt(cnt.innerText, 10)+1;
+    }*/
+    
+
+
+    //console.log("before", pair);
 
     if (!isRunning) {
       return;
     }
-
-    console.log("before", pair);
 
     const cardDiv = event.currentTarget;
     const cardIndex = extractCardIndex(cardDiv);
@@ -115,13 +188,13 @@ const createGame = (gameDiv, timerDiv, gameOverCallback) => {
       const indexes = pair.map(extractCardIndex);
       const [value1, value2] = indexes.map(index => values[index]);
 
-      console.log(value1, value2, value1 === value2);
+      //console.log(value1, value2, value1 === value2);
 
       if (value1 === value2) {
         indexes.forEach(index => state[index] = true);
         if (state.every(flag => flag)) {
           endTime = Date.now();
-          console.log("YOU WIN", endTime);
+          //console.log("YOU WIN", endTime);
         
           clearInterval(gameTimer);
           gameTimer = null;
@@ -148,8 +221,7 @@ const createGame = (gameDiv, timerDiv, gameOverCallback) => {
       }
 
     }
-
-    console.log("after", pair, timers);
+    //console.log("after", pair, timers);
   }
 
   
@@ -207,4 +279,5 @@ const createGame = (gameDiv, timerDiv, gameOverCallback) => {
       return isRunning;
     }
   };
+  
 };
