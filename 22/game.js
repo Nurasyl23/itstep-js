@@ -68,41 +68,7 @@ const createGame = (gameDiv, timerDiv, gameOverCallback) => {
 
     return div;
   }
-  /*
-    const btn = document.querySelector('.button');
-
-    function hendleBtnClick(event) {
-      event.preventDefault();
-      // eslint-disable-next-line prefer-const
-      let counteClickBtn = btn.textContent;
-      btn.textContent = parseInt(counteClickBtn) + 1;
-    }
-    
-    btn.addEventListener('click', hendleBtnClick);
-    */
-  /*
-  document.querySelectorAll('ul .btn')
-  .forEach(function(el){ 
-    el.onclick = function() {
-      let cnt = this.closest('li').querySelector('.cnt');
-      cnt.innerText = parseInt(cnt.innerText, 10)+1;
-    };
-  });
-<ul>
-  <li>
-    <button class="btn">Button</button>
-    <span class="cnt">0</span>
-  </li>
-  <li>
-    <button class="btn">Button</button>
-    <span class="cnt">0</span>
-  </li>
-  <li>
-    <button class="btn">Button</button>
-    <span class="cnt">0</span>
-  </li>
-</ul>
-*/
+  
   let pair = []; // 0-2 элементов
 
   const openCard = (cardDiv) => {
@@ -119,49 +85,6 @@ const createGame = (gameDiv, timerDiv, gameOverCallback) => {
   const extractCardIndex = (cardDiv) => parseInt(cardDiv.dataset.index);
 
   const handleClick = (event) => {
-    /*
-    let i = 0;
-    let scores =  i + event.target.value;
-    console.log(scores);
-    console.log(event.target.value)
-    */
-   /*
-  document.getElementsByClassName("card__face")
-  .forEach(function(el){ 
-    el.onclick = function() {
-      let cnt = document.getElementsByClassName('cnt');
-      cnt.innerText = parseInt(cnt.innerText, 10)+1;
-      console.log(cnt)
-    };
-  });
-*//*
-  const d = () => {
-    let cnt = document.getElementsByClassName('cnt');
-    cnt.innerText = parseInt(cnt.innerText, 10)+1;
-    console.log(cnt)
-    console.log(cnt.innerText)
-  };
-  d()*/
-  /*
-  document.getElementsByClassName('card').onclick = function(e) {
-    let target = e.target;
-    if (target.tagName != 'DIV') return;
-    let cnt = target.document.getElementsByClassName('cnt');
-    cnt.innerText = parseInt(cnt.innerText, 10)+1;
-  }
-  */
-    /*
-    document.querySelector('ul').onclick = function(e) {
-      let target = e.target;
-      if (target.tagName != 'BUTTON') return;
-      let cnt = target.closest('li').querySelector('.cnt');
-      cnt.innerText = parseInt(cnt.innerText, 10)+1;
-    }*/
-    
-
-
-    //console.log("before", pair);
-
     if (!isRunning) {
       return;
     }

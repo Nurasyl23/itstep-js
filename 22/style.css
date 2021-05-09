@@ -29,7 +29,6 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: cadetblue;
   
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -37,6 +36,9 @@
     column-gap: 40px;
     row-gap: 40px;
   }
+   .home-standart {
+    background-color: cadetblue;
+   }
   .home__container {
     display: flex;
     flex-direction: column;
@@ -44,6 +46,8 @@
     align-items: center;
   }
   .home__list {
+  }
+   .home__list-standart {
     width: 360px;
     height: 40px;
     background-color: crimson;
@@ -51,16 +55,18 @@
       
     font-size: 20px;
     color: white;
-  }
+   }
   .home__list-hidden {
     display: none;
   }
   .list__item {
-    background-color: darkblue;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+    .list__item-standart {
+      background-color: darkblue;
+    }
     .home_hidden {
       display: none;
     }
@@ -85,8 +91,10 @@
     right: 0;
     top: 0;
     height: 100px;
-    background-color: chartreuse;
   }
+    .game-state-standart {
+      background-color: chartreuse;
+    }
   
     .game-state_hidden {
       display: none;
@@ -98,28 +106,33 @@
   }
   
   .button-start {
-    height: 60px;
-    width: 260px;
-    background-color: coral;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 22px;
-    color: white;
   }
     .button-start_hidden {
       display: none;
     }
+    .button-start-standart {
+      font-size: 22px;
+      color: white;
+
+      height: 60px;
+      width: 260px;
+      background-color: coral;
+    }
   
   
   .button-pause {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    height: 60px;
-    width: 60px;
-    background-color: coral;
   }
+    .button-pause-standart {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      height: 60px;
+      width: 60px;
+      background-color: coral;
+    }
   
     .button-pause_hidden {
       display: none;
@@ -185,18 +198,29 @@
   bottom: 20%;
   left: 37%;
   right: 37%;
-  background-color: rgb(55, 187, 106);
 }
 .menu__hidden {
   display: none;
+}
+.menu__list {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .menu__list-item {
   display: flex;
   justify-content: center;
   align-items: center;
-
+}
+ .menu-standart {
+  background-color: rgb(55, 187, 106);
+ }
+ .menu__list-item-standart {
   width: 260px;
   height: 45px;
   background-color: black;
   color: white;
-}
+  margin-bottom: 30px;
+ }
