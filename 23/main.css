@@ -1,59 +1,87 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0; 
-  }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; 
+}
+
+html, body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 1;
+}
+.button_left {
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  position: absolute;
+  left: 10px;
+}
+.button_right {
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  position: absolute;
+  right: 10px;
+  z-index: 1;
+}
+.button {
+  /*
+  width: 40px;
+  height: 40px;
+  margin: 20px;*/
+  /*background-color: rgb(255, 60, 0);*/
+}
+
+.slider {
+  position: relative;
+}
+.slider__container {
+  width: 1400px;
+  position: relative;
+  /*padding: 20px;*/
+  /*background-color: rgb(255, 0, 0);*/
+  overflow: hidden;
+}
+
+.slider__film {
+  background-color: rgb(74, 0, 247);
   
-  html, body {
-    height: 100%;
-  }
-  
-  .buttons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .button {
-    width: 40px;
-    height: 40px;
-    margin: 20px;
-    background-color: aquamarine;
-  }
-  
-  .slider__container {
-    /* width: 100%; */
-    margin: 0 200px;
-  
-    /* height: 200px; */
-    position: relative;
-    padding: 20px;
-    background-color: lemonchiffon;
-    overflow: hidden;
-  }
-  
-  .slider__film {
-    background-color: lightcyan;
-    
-  
-    align-items: center;
-    justify-content: center;
-  
-    transition: transform 1s ease-out;
-  }
-  
-  .slider__slide {
-    padding: 20px;
-  
-  }
-  
-  .slide__content {
-    background-color: cadetblue;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .slide_active .slide__content{
-    outline: 5px solid magenta;
-  }
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 1s ease-out;
+}
+/*
+.slider__slide {
+  padding: 40px;
+}
+*/
+.slide__content {
+  background-color: cadetblue;
+  width: 700px;
+  height: 700px;
+}
+/*
+.slide_active .slide__content{
+  outline: 5px solid magenta;
+}*/
+.post {
+  width: 100%;
+  height: 100%;
+  background-color: darkslateblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

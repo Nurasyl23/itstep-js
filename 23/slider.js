@@ -39,7 +39,7 @@ class Slider {
   
       x = Math.max(min, Math.min(max, x));
   
-      // console.log(x, this._paddingLeft);
+      console.log(x, this._paddingLeft);
       
       this._film.style.transform = "translateX(" + x + "px)";
     }
@@ -155,4 +155,4 @@ class Slider {
       this._playTimer = null;
     }
   
-  }
+}
