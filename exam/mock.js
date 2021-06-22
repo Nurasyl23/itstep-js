@@ -603,16 +603,15 @@ const places =
 ]
 
 
-const generateFrom = (i) => places[randomInt(0, places.length)];
+const from = (i) => places[randomInt(0, places.length)];
 
-const generateTo = (i) => places[randomInt(0, places.length)];
-
+const to = (i) => places[randomInt(0, places.length)];
 
 const generateLocation = i => 
     new Location(
-        generateFrom(i),
-        generateTo(i),
+        from(i),
+        to(i),
     );
 
 
-const generateLocations = createArray(generateLocation(20));
+const generateLocations = createArray(generateLocation);

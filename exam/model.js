@@ -27,7 +27,7 @@ class DbContext {
             const  request = window.indexedDB.open(DbContext.DB_NAME, DbContext.VERSION);
 
             request.addEventListener("error", (e) => {
-                console.log(e);
+                console.log(request, e);
                 reject(e);
             });
         
@@ -48,9 +48,7 @@ class DbContext {
 
     }
 
-    /*
-     *@param {IDBVersionChangeEvent} e
-     */
+    
     static upgrade(e) {
         console.log("DbContext", `UPGRADE from ${e.oldVersion} to ${e.newVersion}`)
         //console.log(this, e);
@@ -68,4 +66,40 @@ class DbContext {
             }
         }
     }
+
+    seed(generateLocations) {
+
+        return new Promise((resolve, reject) => {
+
+            const transaction = this.db.transaction("locations", "readwrite");
+
+            transaction.addEventListener("complete", e => {
+                console.log("DbContext", "saved", e);
+    
+                resolve();
+            });
+
+            transaction.addEventListener("error", e => {
+                reject(e);
+            });
+    
+            const store = transaction.objectStore("locations");
+
+            store.count().onsuccess = e => {
+
+                if (e.target.result > 0) {
+                    return;
+                }
+
+                generateLocations(600).forEach(location => {
+                    store.add(location);
+                });
+
+            }
+
+        });
+
+    }
+
+    findLocations()
 }
