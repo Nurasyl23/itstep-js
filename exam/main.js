@@ -7,9 +7,9 @@ window.addEventListener("load", async () => {
 
     const inputFirst = document.forms["search"].elements["query1"];
 
-    inputFirst.addEventListener("input", e => {
+    inputFirst.addEventListener("input", async e => {
 
-        const { value } = inputFirst;
+        let { value } = inputFirst;
 
         value = value.trim();
 
@@ -23,7 +23,8 @@ window.addEventListener("load", async () => {
 
         const locations = await db.findLocations(predicate);
 
-        renderLocations(locations)
+        console.log(locations);
+        //renderLocations(locations);
     });
 
     console.log(db);

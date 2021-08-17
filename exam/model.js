@@ -101,5 +101,43 @@ class DbContext {
 
     }
 
-    findLocations()
+    findLocations(predicate) {
+
+        return new Promise((resolve, reject) => {
+
+            const transaction = this.db.transaction("locations", "readonly");
+
+            const result = [];
+
+            transaction.addEventListener("complete", e => {
+                console.log("DbContext", "find", e);
+    
+                resolve(result);
+            });
+
+            transaction.addEventListener("error", e => {
+                reject(e);
+            });
+    
+            const store = transaction.objectStore("locations");
+
+            store.openCursor().onsuccess = e => {
+
+                var cursor = e.target.result;
+
+                if(cursor) {
+
+                    const value = cursor.value;
+
+                    predicate(value) && (result.push(value));
+                   
+                    cursor.continue();
+                } else {
+                    console.log("DbContext", "cursor end")
+                }
+
+            }
+
+        });
+    }
 }
